@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+source /tmp/be-builder/functions/boot_config.sh
+
+enableBootConfigOverlay "pi3-disable-bt" "[BE] Disable BT on RPi3, so console works, comment out if you want BT"
+

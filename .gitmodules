@@ -1,0 +1,4 @@
+[submodule "rpi-img-builder"]
+	path = docker/docker-builder/rpi-img-builder
+	url = https://github.com/BEinControl/rpi-img-builder.git
+	branch = dfarrell

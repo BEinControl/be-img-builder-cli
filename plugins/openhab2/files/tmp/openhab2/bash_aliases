@@ -1,0 +1,4 @@
+alias oh="sudo service openhab2"
+alias ohc="openhab-cli console"
+alias ohl="openhab-cli showlogs"
+

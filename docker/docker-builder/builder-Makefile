@@ -1,0 +1,61 @@
+.PHONY: help list build clean
+
+.DEFAULT_GOAL := help
+
+ME  := $(realpath $(firstword $(MAKEFILE_LIST)))
+PWD := $(dir $(ME))
+
+##
+# help
+# Displays list of targets, using target '##' comments as descriptions
+# NOTE: Keep 'help' as first target in case .DEFAULT_GOAL is not honored
+#
+help:      ## This help screen
+	@echo
+	@echo  "Make targets:"
+	@echo
+	@cat $(ME) | \
+	sed -n -r 's/^([^.][^: ]+)\s*:(([^=#]*##\s*(.*[^[:space:]])\s*)|[^=].*)$$/    \1\t\4/p' | \
+	sort -u | \
+	expand -t15
+	@echo
+
+##
+# list
+# We place 'list' after 'help' to keep 'help' as first target
+#
+list: help ## List targets (currently an alias for 'help')
+
+##
+# image
+#
+image: clean ## Build the image. usage: CLIENT=<client> DEVICE=<device>
+	@if [ -z "$(CLIENT)" ] || [ -z "$(DEVICE)" ]; \
+	then ( \
+		echo; \
+		echo "Usage: image CLIENT=client DEVICE=device"; \
+	) elif [ ! -d "$(PWD)clients/$(CLIENT)/" ]; \
+	then ( \
+		echo; \
+		echo "Client not found: '$(CLIENT)'"; \
+	) elif [ ! -d "$(PWD)clients/$(CLIENT)/$(DEVICE)/" ]; \
+	then ( \
+		echo; \
+		echo "Device not found: '$(DEVICE)'"; \
+	) else ( \
+		mkdir -p "$(PWD)/images/$(CLIENT)/$(DEVICE)" && \
+		cd builder && \
+		$(MAKE) build \
+		PLUGINS_DIR="$(PWD)clients/$(CLIENT)/$(DEVICE)/plugins"   \
+		OVERRIDES="$(PWD)clients/$(CLIENT)/$(DEVICE)/settings.mk" \
+		IMAGE_DIR="$(PWD)/images/$(CLIENT)/$(DEVICE)"             \
+		PKG_CACHE_DIR="$(PWD)/package-cache"                      \
+	) fi
+
+##
+# clean
+#
+clean: ## Execute rpi-img-builder:distclean
+	# TODO: Make 'clean' work (vs 'distclean') to re-use base system
+	cd builder && \
+	$(MAKE) distclean

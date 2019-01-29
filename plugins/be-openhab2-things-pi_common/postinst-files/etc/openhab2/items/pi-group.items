@@ -1,0 +1,7 @@
+/*
+ * /etc/openhab2/items/pi-group.items
+ *
+ * BEINCONTROLL (c) 2018 Brilliant Efficiencies
+ */
+
+Group RaspberryPi "Raspberry Pi"

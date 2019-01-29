@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -e
+
+UNAME="$1"
+HOME="/home/${UNAME}"
+TMP="/tmp/kiosk-openbox-chromium"
+
+TMP_BIN="${TMP}/bin"
+BIN="${HOME}/bin"
+
+CONFIG="${HOME}/.config"
+
+TMP_OPENBOX="${TMP}/openbox"
+OPENBOX="${CONFIG}/openbox"
+
+TMP_PROFILE="${TMP}/startx"
+PROFILE="/${HOME}/.profile"
+
+TMP_URL="${TMP}/KIOSK.URL"
+URL="${HOME}/KIOSK.URL"
+
+chown -R "${UNAME}.${UNAME}" "${TMP}"
+
+# Add config folder
+#
+if [ ! -d "${CONFIG}" ]; then
+	mkdir -p "${CONFIG}"
+	chown "${UNAME}.${UNAME}" "${CONFIG}"
+fi
+
+# Add openbox files
+#
+if [ ! -d "${OPENBOX}" ]; then
+	mkdir -p "${OPENBOX}"
+	chown "${UNAME}.${UNAME}" "${OPENBOX}"
+fi
+
+cd "${TMP_OPENBOX}" && find . -type f -exec cp --preserve=ownership,mode,timestamps --parents \{\} "${OPENBOX}" \;
+#cd $$i/files       && find . -type f -exec cp --preserve=mode,timestamps --parents \{\} $@ \;; \
+
+# Add $HOME/bin files
+#
+if [ ! -d "${BIN}" ]; then
+	mkdir -p "${BIN}"
+	chown "${UNAME}.${UNAME}" "${BIN}"
+fi
+
+cd "${TMP_BIN}" && find . -type f -exec cp --preserve=ownership,mode,timestamps --parents \{\} "${BIN}" \;
+
+# Add default KIOSK URL
+#
+cp -p "${TMP_URL}" "${URL}"
+
+# Add startx script to profile
+#
+if [ ! -f "${PROFILE}" ]; then
+	touch "${PROFILE}"
+	chown "${UNAME}.${UNAME}" "${PROFILE}"
+fi
+
+cat "${TMP_PROFILE}" >> "${PROFILE}"
+
+# Cleanup
+#
+rm -rf "${TMP}"

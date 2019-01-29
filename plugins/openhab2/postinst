@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -e
+
+UNAME="$1"
+HOME="/home/${UNAME}"
+TMP="/tmp/openhab2"
+
+# NOTE: This package may have errors enabling auto-start within the builder
+#systemctl daemon-reload
+#systemctl enable openhab2.service
+
+source /tmp/be-builder/functions/openhab_etc.sh
+
+#
+# Fix permissions on any files copied into the openhab2 folder
+#
+fixOpenhabEtcPermissions
+
+#
+# Add user openhab to useful groups
+# NOTE: Currently have non-pre-existing groups disabled
+# List taken from 2.3.0 Dockerfile
+#   https://github.com/openhab/openhab-docker/blob/master/2.3.0/armhf/debian/entrypoint.sh#L34
+#
+adduser openhab dialout
+adduser openhab uucp
+#groupadd -g 14 uucp2
+#groupadd -g 32 uucp3
+#groupadd -g 16 dialout2
+#groupadd -g 18 dialout3
+#groupadd -g 997 gpio
+#adduser openhab uucp2
+#adduser openhab uucp3
+#adduser openhab dialout2
+#adduser openhab dialout3
+#adduser openhab gpio
+
+#
+# Bash Aliases
+#
+
+TMP_BASH_ALIASES="${TMP}/bash_aliases"
+
+if [ -f "${TMP_BASH_ALIASES}" ]; then
+	BASH_ALIASES="${HOME}/.bash_aliases"
+
+	if [ ! -f "${BASH_ALIASES}" ]; then
+		touch "${BASH_ALIASES}"
+		chown "${UNAME}.${UNAME}" "${BASH_ALIASES}"
+	fi
+
+	cat "${TMP_BASH_ALIASES}" >> "${BASH_ALIASES}"
+
+	rm "${TMP_BASH_ALIASES}"
+fi
+
+
+#
+# Cleanup
+#
+
+rmdir "${TMP}"

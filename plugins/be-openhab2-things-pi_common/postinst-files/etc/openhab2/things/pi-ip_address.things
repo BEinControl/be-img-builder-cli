@@ -1,0 +1,7 @@
+/*
+ * /etc/openhab2/things/pi-ip_address.things
+ *
+ * BEINCONTROLL (c) 2018 Brilliant Efficiencies
+ */
+
+Thing exec:command:pi_ip_addresses [command="/bin/hostname -I", interval=300]

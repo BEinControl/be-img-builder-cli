@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e
+
+chmod ug+r,o-r,ugo-wx /etc/sudoers.d/020_openhab-backlight
+
+UNAME="$1"
+HOME="/home/${UNAME}"
+TMP="/tmp/home-be_in_control"
+
+TMP_BEINCONTROL="${TMP}/BEINCONTROL"
+
+chown -R "${UNAME}.${UNAME}" "${TMP_BEINCONTROL}"
+
+cp -rp "${TMP_BEINCONTROL}" "${HOME}/"
+
+# Cleanup
+#
+rm -rf "${TMP}"

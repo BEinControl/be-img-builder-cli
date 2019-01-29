@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+source /tmp/be-builder/functions/openhab_etc.sh
+
+enableOpenhabBinding "zwave" "[BE] Enabling ZWAVE binding"

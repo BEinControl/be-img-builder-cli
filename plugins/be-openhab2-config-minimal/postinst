@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+source /tmp/be-builder/functions/openhab_etc.sh
+
+setOpenhabInstallationType "minimal" '[BE] Using Minimal Installation'
+
+enableOpenhabBinding "exec" "[BE] Enabling Exec Binding"
+
+enableOpenhabUI "habmin" "[BE] Enabling HabMin UI"
+enableOpenhabUI "paper"  "[BE] Enabling Paper  UI"
+
+enableOpenhabTransform "exec"  "[BE] Enabling Exec Transform"
+enableOpenhabTransform "regex" "[BE] Enabling Regex Transform"

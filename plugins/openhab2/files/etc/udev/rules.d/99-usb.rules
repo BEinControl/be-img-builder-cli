@@ -1,0 +1,6 @@
+SUBSYSTEMS=="usb", ATTRS{interface}=="HubZ Z-Wave Com Port", KERNEL=="ttyUSB*", SYMLINK+="hubz-zwave"
+
+SUBSYSTEMS=="usb", ATTRS{interface}=="HubZ ZigBee Com Port", KERNEL=="ttyUSB*", SYMLINK+="hubz-zigbee"
+
+SUBSYSTEMS=="usb", ACTION=="add", ATTRS{interface}=="DMX USB PRO Mk2", KERNEL=="ttyUSB*", SYMLINK+="enttec-usb-pro-mk2", GROUP="plugdev"
+

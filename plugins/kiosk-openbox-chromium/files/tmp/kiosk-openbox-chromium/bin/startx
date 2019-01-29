@@ -1,0 +1,12 @@
+#!/bin/bash
+
+STARTX="/usr/bin/startx"
+
+if [ ! -z "$@" ]; then
+        echo "$0 should not be executed with arguments.  Use '${STARTX}' directly for that"
+        exit 1
+fi
+
+# Start X with our customer arguments
+#
+${STARTX} -- -nocursor

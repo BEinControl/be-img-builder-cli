@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+chmod ug+r,o-r,ugo-wx /etc/sudoers.d/001_defaults
+

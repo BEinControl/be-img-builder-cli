@@ -1,0 +1,5 @@
+# /etc/sudoers.d/001_defaults 
+# BEINCONTROL (c) 2018 Brilliant Efficiencies
+
+Defaults tty_tickets
+

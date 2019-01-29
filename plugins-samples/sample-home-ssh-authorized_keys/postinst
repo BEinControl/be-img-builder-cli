@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+
+UNAME="$1"
+HOME="/home/${UNAME}"
+TMP="/tmp/home-ssh-authorized_keys"
+
+TMP_SSH="${TMP}"
+SSH="${HOME}/.ssh"
+
+TMP_KEYS="${TMP_SSH}/authorized_keys"
+KEYS="${SSH}/authorized_keys"
+
+if [ ! -d "${SSH}" ]; then
+	mkdir -p "${SSH}"
+	chown -R "${UNAME}.${UNAME}" "${SSH}"
+	chmod u+rwx,go-rwx "${SSH}"
+fi
+
+if [ ! -f "${KEYS}" ]; then
+	touch "${KEYS}"
+	chown "${UNAME}.${UNAME}" "${KEYS}"
+	chmod u+rw,go-rw,ugo-x "${KEYS}"
+fi
+
+cat "${TMP_KEYS}" >> "${KEYS}"
+
+#
+# Cleanup
+#
+
+rm -rf "${TMP}"

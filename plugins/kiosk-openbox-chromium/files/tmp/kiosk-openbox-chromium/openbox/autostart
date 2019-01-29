@@ -1,0 +1,15 @@
+# Disable Power Management
+@xset dpms 0 0 0
+@xset -dpms
+
+# Disable Screen Saver
+@xset s 0 0
+@xset s off
+@xset s noblank
+@xset s noexpose
+
+# Allow quitting the X server with CTRL-ATL-Backspace
+setxkbmap -option terminate:ctrl_alt_bksp
+
+# Start Kiosk
+~/bin/start_kiosk.sh

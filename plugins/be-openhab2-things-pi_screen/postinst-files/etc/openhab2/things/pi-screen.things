@@ -1,0 +1,8 @@
+/*
+ * /etc/openhab2/things/pi-screen.things
+ *
+ * BEINCONTROLL (c) 2018 Brilliant Efficiencies
+ */
+
+Thing exec:command:pi_set_brightness [command="/home/be/BEINCONTROL/openhab/pi_brightness.sh %2$s", interval=0, autorun=true]
+Thing exec:command:pi_get_brightness [command="/home/be/BEINCONTROL/openhab/pi_brightness.sh"     , interval=5              ]

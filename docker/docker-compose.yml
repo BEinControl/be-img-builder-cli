@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+
+  apt-proxy:
+    image: sameersbn/apt-cacher-ng
+    container_name: be-builder-apt-proxy
+    hostname: be-builder-apt-proxy
+    ports:
+      - "3142:3142"
+    volumes:
+      - apt-proxy:/var/cache/apt-cacher-ng
+    restart: always
+
+  builder:
+    build:
+      context: ./docker-builder
+      dockerfile: Dockerfile
+      args:
+        APT_PROXY: "http://be-builder-apt-proxy:3142/"
+    image: local/be-builder:latest
+    container_name: be-builder
+    hostname: be-builder
+    privileged: true
+    volumes:
+      - ../plugins:/be/plugins:ro
+      - ../functions:/be/functions:ro
+      - ../package-cache:/be/package-cache
+      - ../images:/be/images
+      - ../clients:/be/clients:ro
+    tty: true
+
+volumes:
+  apt-proxy:
+    driver: local
+    name  : be_builder_apt_proxy

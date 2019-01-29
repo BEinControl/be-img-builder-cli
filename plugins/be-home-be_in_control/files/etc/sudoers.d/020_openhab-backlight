@@ -1,0 +1,5 @@
+# /etc/sudoers.d/020_openhab-backlight
+# BEINCONTROL (c) 2018 Brilliant Efficiencies
+
+openhab ALL=(ALL) NOPASSWD: /home/be/BEINCONTROL/sbin/pi_backlight_brightness
+

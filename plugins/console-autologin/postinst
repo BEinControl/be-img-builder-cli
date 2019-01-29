@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+UNAME="$1"
+
+# AutoLogin Console technique gleaned from RASPI-CONFIG:
+#   https://github.com/RPi-Distro/raspi-config/blob/master/raspi-config
+#
+systemctl set-default multi-user.target
+sed /etc/systemd/system/autologin@.service -i -e "s#^ExecStart=-/sbin/agetty --autologin [^[:space:]]*#ExecStart=-/sbin/agetty --autologin ${UNAME}#"
+ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service

@@ -1,0 +1,8 @@
+# Ignore .gitignore to allow local mods
+.gitignore
+
+# Plugin package-cache debs should not be in source control
+plugins/*/package-cache/
+
+# Ignore MAC files
+**/.DS_Store

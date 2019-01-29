@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+#
+# Copy shared functions into rootfs
+# so postinst scripts can access them
+# within chroot
+#
+
+FUNCTIONS="/be/functions"
+TMP_BUILDER="rootfs/tmp/be-builder"
+
+mkdir -p "${TMP_BUILDER}"
+
+cp -rp "${FUNCTIONS}" "${TMP_BUILDER}/"

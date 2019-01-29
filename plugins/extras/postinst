@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+
+UNAME="$1"
+HOME="/home/${UNAME}"
+TMP="/tmp/extras"
+
+#
+# Bash Aliases
+#
+
+TMP_BASH_ALIASES="${TMP}/bash_aliases"
+
+if [ -f "${TMP_BASH_ALIASES}" ]; then
+	BASH_ALIASES="${HOME}/.bash_aliases"
+
+	if [ ! -f "${BASH_ALIASES}" ]; then
+		touch "${BASH_ALIASES}"
+		chown "${UNAME}.${UNAME}" "${BASH_ALIASES}"
+	fi
+
+	cat "${TMP_BASH_ALIASES}" >> "${BASH_ALIASES}"
+
+	rm "${TMP_BASH_ALIASES}"
+fi
+
+
+#
+# Cleanup
+#
+
+rmdir "${TMP}"

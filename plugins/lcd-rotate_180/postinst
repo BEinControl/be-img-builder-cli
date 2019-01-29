@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+source /tmp/be-builder/functions/boot_config.sh
+
+addBootConfigProperty "lcd_rotate" "2" "[BE] Flip LCD Screen 180 Degrees"
+

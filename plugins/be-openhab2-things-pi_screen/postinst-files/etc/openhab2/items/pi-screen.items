@@ -1,0 +1,7 @@
+/*
+ * /etc/openhab2/items/pi-screen.items
+ *
+ * BEINCONTROLL (c) 2018 Brilliant Efficiencies
+ */
+
+String PiScreenBrightness (RaspberryPi) {channel="exec:command:pi_set_brightness:input, exec:command:pi_get_brightness:output", autoupdate="true"}

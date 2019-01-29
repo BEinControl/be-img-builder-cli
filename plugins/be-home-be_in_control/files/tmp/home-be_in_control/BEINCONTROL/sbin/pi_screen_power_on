@@ -1,0 +1,9 @@
+#!/bin/bash
+
+FILE="/sys/class/backlight/rpi_backlight/bl_power"
+
+# Yes 0 = ON
+ON="0"
+OFF="1"
+
+echo "${ON}" > "${FILE}"

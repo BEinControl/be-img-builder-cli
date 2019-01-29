@@ -1,0 +1,8 @@
+if [ -x /usr/bin/dircolors ]; then
+	alias ll='ls -l --color=auto'
+	alias dir='ls -l --color=auto'
+else
+	alias ll='ls -l'
+	alias dir='ls -l'
+fi
+

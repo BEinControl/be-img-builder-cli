@@ -1,0 +1,7 @@
+/*
+ * /etc/openhab2/items/pi-ip_address.items
+ *
+ * BEINCONTROLL (c) 2018 Brilliant Efficiencies
+ */
+
+String PiIpAddresses (RaspberryPi) {channel="exec:command:pi_ip_addresses:output", autoupdate="true"}

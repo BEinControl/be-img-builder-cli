@@ -1,0 +1,7 @@
+# /etc/apt/apt.conf.d/99norecommends
+#
+# BEINCONTROL (c) Brilliant Efficiencies
+
+APT::Install-Recommends "false";
+APT::AutoRemove::RecommendsImportant "false";
+APT::AutoRemove::SuggestsImportant "false";

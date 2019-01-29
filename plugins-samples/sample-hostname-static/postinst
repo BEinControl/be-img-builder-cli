@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e
+
+# Confirm hostname file is in place
+#
+[ -f "/etc/hostname" ]
+
+# Did COMMON/hostname plugin already run?
+#
+if [ -f "/var/tmp/system-hostname" ]; then
+	# Cleanup
+	#
+	rm "/var/tmp/system-hostname"
+else
+	# We're first, tell COMMON/hostname pluging to abort
+	#
+	touch "/var/tmp/system-hostname.off"
+fi

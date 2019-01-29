@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+source /tmp/be-builder/functions/boot_cmdline.sh
+source /tmp/be-builder/functions/boot_config.sh
+
+# https://wiki.archlinux.org/index.php/silent_boot
+# https://scribles.net/silent-boot-on-raspbian-stretch-in-console-mode/
+# http://kamilslab.com/2017/03/13/how-to-perform-a-quiet-boot-on-the-raspberry-pi/
+# https://raspberrypi.stackexchange.com/questions/59310/remove-boot-messages-all-text-in-jessie
+
+addBootConfigProperty "disable_splash" "1" "[BE] Disable Splash Screen"
+
+addBootCmdlineProperty "quiet"
+
+addBootCmdlineProperty "loglevel" "3"
+
+addBootCmdlineProperty "vga" "current"
+
+addBootCmdlineProperty "rd.systemd.show_status" "auto"
+
+addBootCmdlineProperty "rd.udev.log_priority" "3"
+
+addBootCmdlineProperty "logo.nologo"

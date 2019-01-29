@@ -1,0 +1,28 @@
+# /home/be/BEINCONTROL/autostart
+#
+# cp \
+#    /home/be/.config/lxsession/LXDE-pi/autostart \
+#    /home/be/.config/lxsession/LXDE-pi/autostart.orig
+# ln -s \
+#    /home/be/BEINCONTROL/autostart \
+#    /home/be/.config/lxsession/LXDE-pi/autostart
+#
+# BEINCONTROL (c) 2018 Brilliant Efficiencies
+
+# Start desktop manager for background image
+@pcmanfm --desktop --profile LXDE-pi
+
+#@xscreensaver -no-splash
+
+# Disable Power Management
+@xset dpms 0 0 0
+@xset -dpms
+
+# Disable Screen Saver
+@xset s 0 0
+@xset s off
+@xset s noblank
+@xset s noexpose
+
+# Hide mouse button
+@unclutter -idle 0
