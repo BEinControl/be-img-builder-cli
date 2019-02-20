@@ -12,7 +12,7 @@ if [ -f "/var/tmp/system-hostname" ]; then
 	#
 	rm "/var/tmp/system-hostname"
 else
-	# We're first, tell COMMON/hostname pluging to abort
+	# We're first, tell COMMON/hostname plugin to abort
 	#
 	touch "/var/tmp/system-hostname.off"
 fi
